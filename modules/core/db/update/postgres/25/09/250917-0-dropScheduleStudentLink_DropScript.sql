@@ -1,0 +1,1 @@
+drop table if exists TESTAPP_SCHEDULE_STUDENT_LINK__U92292 cascade ;

@@ -1,0 +1,1 @@
+alter table testapp_schedule_student_link rename to TESTAPP_SCHEDULE_STUDENT_LINK__U92292 ;

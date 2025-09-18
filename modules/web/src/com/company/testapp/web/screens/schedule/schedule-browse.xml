@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://scheduleBrowse.caption"
+        focusComponent="schedulesTable"
+        messagesPack="com.company.testapp.web.screens.schedule">
+    <data readOnly="true">
+        <collection id="schedulesDc"
+                    class="com.company.testapp.entity.Schedule">
+            <view extends="_local">
+                <property name="student" view="_minimal">
+                    <property name="groupName"/>
+                </property>
+                <property name="teacher" view="_minimal"/>
+                <property name="subject" view="_minimal"/>
+            </view>
+            <loader id="schedulesDl">
+                <query>
+                    <![CDATA[select e from testapp_Schedule e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="schedulesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="schedulesTable"
+                dataLoader="schedulesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="schedulesTable"
+                    width="100%"
+                    dataContainer="schedulesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="teacher" caption="Ф.И.О Учителя"/>
+                <column id="subject" caption="Предмет"/>
+                <column id="duration" caption="Продолжительность предмета"/>
+                <column id="students" caption="Ф.И.О Учеников"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="schedulesTable.create" caption="Создать"/>
+                <button id="editBtn" action="schedulesTable.edit" caption="Изменить"/>
+                <button id="removeBtn" action="schedulesTable.remove" caption="Удалить"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
